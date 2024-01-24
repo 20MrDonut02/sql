@@ -1,0 +1,50 @@
+CREATE TABLE genres (
+  id_genre INT PRIMARY KEY,
+  name_genre VARCHAR(50)
+);
+
+CREATE TABLE performers (
+  id_performer INT PRIMARY KEY,
+  name_performer VARCHAR(50)
+);
+
+CREATE TABLE performer_genres (
+  id_genre INT,
+  id_performer INT,
+  FOREIGN KEY (id_genre) REFERENCES genres(id_genre),
+  FOREIGN KEY (id_performer) REFERENCES performers(id_performer)
+);
+
+CREATE TABLE albums (
+  id_album INT PRIMARY KEY,
+  name_album VARCHAR(50),
+  release_year INT
+);
+
+CREATE TABLE album_participants (
+  id_performer INT,
+  id_album INT,
+  FOREIGN KEY (id_performer) REFERENCES performers(id_performer),
+  FOREIGN KEY (id_album) REFERENCES albums(id_album)
+);
+
+CREATE TABLE tracks (
+  id_track INT PRIMARY KEY,
+  name_track VARCHAR(50),
+  duration_track INT,
+  id_album INT,
+  FOREIGN KEY (id_album) REFERENCES albums(id_album)
+);
+
+CREATE TABLE collections (
+  id_collection INT PRIMARY KEY,
+  name_collection VARCHAR(50),
+  release_year INT
+);
+
+CREATE TABLE collection_tracks (
+  id_track INT,
+  id_collection INT,
+  FOREIGN KEY (id_track) REFERENCES tracks(id_track),
+  FOREIGN KEY (id_collection) REFERENCES collections(id_collection)
+);
